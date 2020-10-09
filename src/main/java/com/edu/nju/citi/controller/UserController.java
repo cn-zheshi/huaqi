@@ -16,19 +16,19 @@ import java.util.UUID;
 public class UserController {
     //cookie 用来判断用户是否登陆，但采用什么类存疑
     @PostMapping("/create")
-    public ResponseVO AccountCreationRequest(UUID Uuid, ContentType Content_type) {
+    public ResponseEntity<ResponseVO> accountCreationRequest(@RequestHeader("uuid") String uuid, @RequestHeader("Content-Type") String type) {
         return null;
     }
 
     //账户注册
     @GetMapping("/request_verification")
-    public ResponseVO Verification(Cookie cookie, UUID Uuid) {
+    public ResponseEntity<ResponseVO> verification(Cookie cookie, UUID uuid) {
         return null;
     }
 
     //账户验证
     @PostMapping("/verify")
-    public ResponseVO Verify(UUID uuid, Cookie cookie, ContentType type) {
+    public ResponseEntity<ResponseVO> verify(@RequestHeader("uuid") String uuid, @CookieValue("session_id") String sessionID, @RequestHeader("Content-Type") String type) {
         return null;
     }
 
@@ -36,14 +36,14 @@ public class UserController {
 
 
     @PostMapping("/login")
-    public ResponseVO User_login(UUID uuid, ContentType type) {  //Content-Type: application/json required
+    public ResponseEntity<ResponseVO> userLogin(@RequestHeader("uuid") String uuid, @RequestHeader("Content-Type") String type) {  //Content-Type: application/json required
         return null;
     }
 
     //用户登陆
 
     @GetMapping("/info")
-    public ResponseVO AccountInfo(UUID UUid, Cookie Cookie) {
+    public ResponseEntity<ResponseVO> accountInfo(@RequestHeader("uuid") String uuid, @CookieValue("session_id") String sessionID) {
         return null;
     }
 
@@ -51,13 +51,13 @@ public class UserController {
 
 
     @PostMapping("/info")
-    public ResponseVO Change_accountinfo(UUID uuid, Cookie cookie, ContentType type) {
+    public ResponseEntity<ResponseVO> changeAccountInfo(@RequestHeader("uuid") String uuid, @CookieValue("session_id") String sessionID, @RequestHeader("Content-Type") String type) {
         return null;
     }
 
 
     @PostMapping("/bind")
-    public ResponseVO Bind_citiaccount(UUID uuid, Cookie cookie, ContentType type) {
+    public ResponseEntity<ResponseVO> bindCitiAccount(@RequestHeader("uuid") String uuid, @CookieValue("session_id") String sessionID, @RequestHeader("Content-Type") String type) {
         return null;
     }
 
