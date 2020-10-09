@@ -2,6 +2,9 @@ package com.edu.nju.citi.controller;
 
 
 import com.edu.nju.citi.VO.ResponseVO;
+import com.edu.nju.citi.form.*;
+import com.form.UserForm;
+import com.form.UserLoginForm;
 import com.sun.xml.messaging.saaj.packaging.mime.internet.ContentType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,39 +18,35 @@ import java.util.UUID;
 @RequestMapping("/api/v1/account") //domain为网站的域名
 public class UserController {
     //cookie 用来判断用户是否登陆，但采用什么类存疑
+    //账户注册
     @PostMapping("/create")
-    public ResponseEntity<ResponseVO> accountCreationRequest(@RequestHeader("uuid") String uuid, @RequestHeader("Content-Type") String type) {
+    public ResponseEntity<ResponseVO> accountCreationRequest(@RequestHeader("uuid") String uuid, @RequestHeader("Content-Type") String type,@RequestBody UserForm usr) {
         return null;
     }
 
-    //账户注册
+    //账户验证
     @GetMapping("/request_verification")
     public ResponseEntity<ResponseVO> verification(Cookie cookie, UUID uuid) {
         return null;
     }
 
-    //账户验证
+    //验证验证码是否正确
     @PostMapping("/verify")
     public ResponseEntity<ResponseVO> verify(@RequestHeader("uuid") String uuid, @CookieValue("session_id") String sessionID, @RequestHeader("Content-Type") String type) {
         return null;
     }
 
-    //验证验证码是否正确
-
-
-    @PostMapping("/login")
-    public ResponseEntity<ResponseVO> userLogin(@RequestHeader("uuid") String uuid, @RequestHeader("Content-Type") String type) {  //Content-Type: application/json required
-        return null;
-    }
-
     //用户登陆
-
-    @GetMapping("/info")
-    public ResponseEntity<ResponseVO> accountInfo(@RequestHeader("uuid") String uuid, @CookieValue("session_id") String sessionID) {
+    @PostMapping("/login")
+    public ResponseEntity<ResponseVO> userLogin(@RequestHeader("uuid") String uuid, @RequestHeader("Content-Type") String type, @RequestBody UserLoginForm loginform) {  //Content-Type: application/json required
         return null;
     }
 
     //查看账户信息
+    @GetMapping("/info")
+    public ResponseEntity<ResponseVO> accountInfo(@RequestHeader("uuid") String uuid, @CookieValue("session_id") String sessionID) {
+        return null;
+    }
 
 
     @PostMapping("/info")
