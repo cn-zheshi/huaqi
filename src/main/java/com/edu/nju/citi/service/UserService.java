@@ -1,7 +1,7 @@
 package com.edu.nju.citi.service;
 
 import com.edu.nju.citi.VO.*;
-import com.form.*;
+import com.edu.nju.citi.form.*;
 
 public interface UserService {
     ResponseVO creat(UserForm usr);
