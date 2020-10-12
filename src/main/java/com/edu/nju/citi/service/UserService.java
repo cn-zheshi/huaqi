@@ -7,4 +7,5 @@ public interface UserService {
     ResponseVO creat(UserForm usr);
     ResponseVO login(UserLoginForm loginform);
     ResponseVO info(String sessionID);
+    ResponseVO bind(String sessionID,CitiBindingForm citiAccount);
 }

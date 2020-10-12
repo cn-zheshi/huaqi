@@ -72,7 +72,10 @@ public class UserController {
             return new ResponseEntity<>(ResponseVO.error("用户未登录"), HttpStatus.BAD_REQUEST); 
         }
         rvo=userService.info(sessionID);
-        return new ResponseEntity<>(rvo,HttpStatus.OK);;
+        if(rvo.getCode().equals(ResponseCode.ERROR)){
+            return new ResponseEntity<>(ResponseVO.error("用户未找到"), HttpStatus.UNAUTHORIZED); 
+        }
+        return new ResponseEntity<>(rvo,HttpStatus.OK);
     }
 
     /*
@@ -84,8 +87,15 @@ public class UserController {
     */
 
     @PostMapping("/bind")
-    public ResponseEntity<ResponseVO> bindCitiAccount(@RequestHeader("uuid") String uuid, @CookieValue("session_id") String sessionID, @RequestHeader("Content-Type") String type) {
-        return null;
+    public ResponseEntity<ResponseVO> bindCitiAccount(@RequestHeader("uuid") String uuid, @CookieValue("session_id") String sessionID, @RequestHeader("Content-Type") String type,@RequestBody CitiBindingForm citiAccount) {
+        if(sessionID==null){
+            return new ResponseEntity<>(ResponseVO.error("用户未登录"),HttpStatus.UNAUTHORIZED);
+        }
+        rvo=userService.bind(sessionID, citiAccount);
+        if(rvo.getCode().equals(ResponseCode.ERROR)){
+            return new ResponseEntity<>(ResponseVO.error("绑定失败"), HttpStatus.BAD_REQUEST); 
+        }
+        return new ResponseEntity<>(rvo,HttpStatus.OK);
     }
 
 
