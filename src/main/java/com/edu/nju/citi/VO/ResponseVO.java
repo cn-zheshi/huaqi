@@ -36,4 +36,7 @@ public class ResponseVO {
         return new ResponseVO(data);
     }
 
+    public ResponseCode getCode(){
+        return code;
+    }
 }
