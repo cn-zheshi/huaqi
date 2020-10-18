@@ -29,12 +29,14 @@ public class UserController {
     //账户注册
     @PostMapping("/create")
     public ResponseEntity<ResponseVO> accountCreationRequest(@RequestHeader("uuid") String uuid, @RequestHeader("Content-Type") String type,@RequestBody UserForm usr) {
-        rvo=userService.creat(usr);
+        //名字里不应出现特殊字符@￥$&%*#!等
+        Pair<ResponseVO,String> pair=userService.creat(usr);
+        rvo=pair.getKey();
         if(rvo.getCode().equals(ResponseCode.ERROR)){
             return new ResponseEntity<>(ResponseVO.error("用户已存在"), HttpStatus.BAD_REQUEST);
         }
         HttpHeaders headers=new HttpHeaders();
-        String id=usr.getEmail();//这个咋整咱也不知道先用着email?
+        String id=pair.getValue();//这个咋整咱也不知道先用着email?
         headers.add("Set-Cookie","session-id="+id);
         return new ResponseEntity<>(rvo,headers,HttpStatus.OK);
     }
